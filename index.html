@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10191c" />
+    <title>免疫战争 | 核心循环验证</title>
+    <script type="module" crossorigin src="/ARPG-Dev-Playtest/assets/index-ClHgpGnR.js"></script>
+    <link rel="stylesheet" crossorigin href="/ARPG-Dev-Playtest/assets/index-gpr8R6sU.css">
+  </head>
+  <body>
+    <aside id="dev-viewport-tools" class="dev-viewport-tools" aria-label="开发画面预设" hidden>
+      <span>画面</span>
+      <div role="group" aria-label="画面比例">
+        <button type="button" data-viewport-preset="portrait">9:16</button>
+        <button type="button" data-viewport-preset="landscape">16:9</button>
+        <button type="button" data-viewport-preset="fill">铺满</button>
+      </div>
+    </aside>
+    <main class="game-shell" data-viewport-preset="fill">
+      <header class="topbar">
+        <div class="brand-block">
+          <span class="project-kicker">PROJECT IW / PHASE 01</span>
+          <h1>免疫战争</h1>
+        </div>
+        <div class="mission-block">
+          <span class="mission-label">当前任务</span>
+          <strong id="mission-copy">清除感染体，稳定组织区域</strong>
+        </div>
+        <div class="run-timer" aria-label="剩余时间"><span>剩余</span><strong id="timer-copy">3:00</strong></div>
+        <button id="audio-toggle" class="icon-button" type="button" title="声音开关" aria-label="关闭声音" aria-pressed="true"><span aria-hidden="true">♪</span></button>
+        <label class="volume-control" title="音量">
+          <input id="audio-volume" type="range" min="0" max="100" step="5" value="90" aria-label="音量" aria-valuetext="90%" />
+          <output id="audio-volume-copy" for="audio-volume">90%</output>
+        </label>
+        <button id="restart-button" class="icon-button" type="button" title="重新开始" aria-label="重新开始">↻</button>
+      </header>
+
+      <section class="playfield" aria-label="游戏区域">
+        <div id="game-container"></div>
+        <div class="hud hud-left" aria-live="polite">
+          <div class="level-badge">
+            <i id="role-avatar" class="role-avatar" aria-hidden="true">吞</i>
+            <span id="role-name">巨噬细胞</span>
+            <strong id="level-value">1</strong>
+          </div>
+          <div class="meter-group">
+            <div class="meter-copy"><span>结构完整度</span><strong id="health-copy">100 / 100</strong></div>
+            <div class="meter health-meter"><i id="health-fill"></i></div>
+            <div class="meter-copy"><span>免疫记忆</span><strong id="xp-copy">0 / 100</strong></div>
+            <div class="meter xp-meter"><i id="xp-fill"></i></div>
+            <div id="buff-list" class="buff-list" aria-label="当前增益"><span class="buff-empty">暂无增益</span></div>
+          </div>
+        </div>
+        <div class="hud hud-right">
+          <div><span>感染体</span><strong id="enemy-count">6</strong></div>
+          <div><span>清除</span><strong id="kill-count">0</strong></div>
+          <div><span>采集</span><strong id="loot-count">0</strong></div>
+        </div>
+        <div id="virtual-joystick" class="virtual-joystick" role="application" aria-label="移动摇杆">
+          <span id="joystick-knob" class="joystick-knob"></span>
+        </div>
+        <div id="status-banner" class="status-banner" hidden>
+          <span id="status-kicker">区域稳定</span>
+          <strong id="status-title">感染已清除</strong>
+          <small id="reward-copy" class="reward-copy"></small>
+          <button id="status-action" type="button">再次巡查</button>
+          <button id="status-secondary-action" class="secondary-action" type="button" hidden>放弃并结算</button>
+        </div>
+        <div id="upgrade-overlay" class="upgrade-overlay" hidden>
+          <div class="upgrade-dialog" role="dialog" aria-modal="true" aria-labelledby="upgrade-title">
+            <span>免疫应答升级</span>
+            <strong id="upgrade-title">选择一种强化</strong>
+            <div id="upgrade-options" class="upgrade-options"></div>
+            <button id="upgrade-ad-refresh" class="ad-action" type="button">完整观看广告刷新 3 个技能</button>
+          </div>
+        </div>
+        <div id="stage-overlay" class="stage-overlay">
+          <div class="stage-dialog" role="dialog" aria-modal="true" aria-labelledby="stage-title">
+            <div class="stage-heading">
+              <span>免疫防线 / 区域选择</span>
+              <strong id="stage-title">选择挑战区域</strong>
+              <small>科研样本 <b id="research-total">0</b> · 图鉴 <b id="codex-total">0</b> / 6</small>
+              <label id="dev-stage-access" class="dev-stage-access" hidden>
+                <input id="dev-unlock-stages" type="checkbox" checked />
+                <span class="dev-stage-switch" aria-hidden="true"></span>
+                <span>开发模式：开放全部关卡</span>
+              </label>
+            </div>
+            <div id="stage-options" class="stage-options"></div>
+          </div>
+        </div>
+        <div id="character-overlay" class="character-overlay">
+          <div class="character-dialog" role="dialog" aria-modal="true" aria-labelledby="character-title">
+            <span>部署免疫单位</span>
+            <strong id="character-title">选择出战细胞</strong>
+            <div id="character-options" class="character-options"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="command-bar">
+        <div class="control-hint"><span class="mouse-icon">◉</span><span><strong>按住左键</strong> 连续走位 / 点击锁定</span></div>
+        <div class="control-hint"><kbd>WASD</kbd><span><strong>WASD / 方向键</strong> 手动移动</span></div>
+        <div class="combat-state"><span class="pulse-dot"></span><strong id="combat-state">巡查中</strong></div>
+      </footer>
+    </main>
+  </body>
+</html>

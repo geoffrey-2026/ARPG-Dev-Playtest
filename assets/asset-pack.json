@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "app": "Phaser Editor v5 compatible asset pack",
+    "contentType": "phasereditor2d.pack.core.AssetContentType",
+    "url": "https://phaser.io"
+  },
+  "immunity-wars": {
+    "files": [
+      {
+        "type": "spritesheet",
+        "key": "nk-idle-sheet",
+        "url": "assets/characters/nk/nk-idle-sheet.png",
+        "frameConfig": {
+          "frameWidth": 256,
+          "frameHeight": 256,
+          "endFrame": 29
+        }
+      }
+    ]
+  }
+}
