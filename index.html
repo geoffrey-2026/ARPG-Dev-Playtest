@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#10191c" />
     <title>免疫战争 | 核心循环验证</title>
-    <script type="module" crossorigin src="/ARPG-Dev-Playtest/assets/index-ClHgpGnR.js"></script>
-    <link rel="stylesheet" crossorigin href="/ARPG-Dev-Playtest/assets/index-gpr8R6sU.css">
+    <script type="module" crossorigin src="/ARPG-Dev-Playtest/assets/index-CYgOcUlg.js"></script>
+    <link rel="stylesheet" crossorigin href="/ARPG-Dev-Playtest/assets/index-DInDUSmQ.css">
   </head>
   <body>
     <aside id="dev-viewport-tools" class="dev-viewport-tools" aria-label="开发画面预设" hidden>
@@ -30,8 +30,8 @@
         <div class="run-timer" aria-label="剩余时间"><span>剩余</span><strong id="timer-copy">3:00</strong></div>
         <button id="audio-toggle" class="icon-button" type="button" title="声音开关" aria-label="关闭声音" aria-pressed="true"><span aria-hidden="true">♪</span></button>
         <label class="volume-control" title="音量">
-          <input id="audio-volume" type="range" min="0" max="100" step="5" value="90" aria-label="音量" aria-valuetext="90%" />
-          <output id="audio-volume-copy" for="audio-volume">90%</output>
+          <input id="audio-volume" type="range" min="0" max="100" step="5" value="100" aria-label="音量" aria-valuetext="100%" />
+          <output id="audio-volume-copy" for="audio-volume">100%</output>
         </label>
         <button id="restart-button" class="icon-button" type="button" title="重新开始" aria-label="重新开始">↻</button>
       </header>
@@ -59,6 +59,14 @@
         </div>
         <div id="virtual-joystick" class="virtual-joystick" role="application" aria-label="移动摇杆">
           <span id="joystick-knob" class="joystick-knob"></span>
+        </div>
+        <div id="combat-actions" class="combat-actions" aria-label="战斗动作" hidden>
+          <button id="dodge-action" class="combat-action dodge-action" type="button" aria-label="闪避">
+            <strong>闪</strong><small id="dodge-cooldown">就绪</small>
+          </button>
+          <button id="active-skill-action" class="combat-action active-skill-action" type="button" aria-label="细胞毒爆发">
+            <strong>破</strong><small id="active-skill-cooldown">就绪</small>
+          </button>
         </div>
         <div id="status-banner" class="status-banner" hidden>
           <span id="status-kicker">区域稳定</span>
@@ -94,6 +102,11 @@
           <div class="character-dialog" role="dialog" aria-modal="true" aria-labelledby="character-title">
             <span>部署免疫单位</span>
             <strong id="character-title">选择出战细胞</strong>
+            <div id="combat-experiment" class="combat-experiment" role="group" aria-label="NK 战斗实验模式">
+              <span>NK 战斗实验</span>
+              <button type="button" data-combat-mode="baseline" aria-pressed="false">A 纯自动</button>
+              <button type="button" data-combat-mode="active" aria-pressed="true">B 主动决策</button>
+            </div>
             <div id="character-options" class="character-options"></div>
           </div>
         </div>
