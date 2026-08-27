@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#10191c" />
     <title>免疫战争 | 核心循环验证</title>
-    <script type="module" crossorigin src="/ARPG-Dev-Playtest/assets/index-oPV-s-np.js"></script>
-    <link rel="stylesheet" crossorigin href="/ARPG-Dev-Playtest/assets/index-DInDUSmQ.css">
+    <script type="module" crossorigin src="/ARPG-Dev-Playtest/assets/index-BccJe35A.js"></script>
+    <link rel="stylesheet" crossorigin href="/ARPG-Dev-Playtest/assets/index-n3UQ1L1z.css">
   </head>
   <body>
     <aside id="dev-viewport-tools" class="dev-viewport-tools" aria-label="开发画面预设" hidden>
@@ -29,6 +29,7 @@
         </div>
         <div class="run-timer" aria-label="剩余时间"><span>剩余</span><strong id="timer-copy">3:00</strong></div>
         <button id="audio-toggle" class="icon-button" type="button" title="声音开关" aria-label="关闭声音" aria-pressed="true"><span aria-hidden="true">♪</span></button>
+        <button id="haptics-toggle" class="icon-button" type="button" title="震动开关" aria-label="关闭震动" aria-pressed="true"><span aria-hidden="true">⌁</span></button>
         <label class="volume-control" title="音量">
           <input id="audio-volume" type="range" min="0" max="100" step="5" value="100" aria-label="音量" aria-valuetext="100%" />
           <output id="audio-volume-copy" for="audio-volume">100%</output>
@@ -47,7 +48,7 @@
           <div class="meter-group">
             <div class="meter-copy"><span>结构完整度</span><strong id="health-copy">100 / 100</strong></div>
             <div class="meter health-meter"><i id="health-fill"></i></div>
-            <div class="meter-copy"><span>免疫记忆</span><strong id="xp-copy">0 / 100</strong></div>
+            <div class="meter-copy"><span title="再获得足够免疫记忆即可升级">免疫记忆</span><strong id="xp-copy">0 / 100</strong></div>
             <div class="meter xp-meter"><i id="xp-fill"></i></div>
             <div id="buff-list" class="buff-list" aria-label="当前增益"><span class="buff-empty">暂无增益</span></div>
           </div>
@@ -72,8 +73,17 @@
           <span id="status-kicker">区域稳定</span>
           <strong id="status-title">感染已清除</strong>
           <small id="reward-copy" class="reward-copy"></small>
+          <small id="run-report" class="run-report" hidden></small>
           <button id="status-action" type="button">再次巡查</button>
           <button id="status-secondary-action" class="secondary-action" type="button" hidden>放弃并结算</button>
+        </div>
+        <div id="first-run-guide" class="first-run-guide" hidden aria-live="polite">
+          <div class="first-run-guide-card">
+            <span id="first-run-guide-step">首次行动 1 / 5</span>
+            <strong id="first-run-guide-title">先移动起来</strong>
+            <p id="first-run-guide-copy">左下摇杆或 WASD 控制细胞走位，护盾期间也可以操作。</p>
+            <button id="first-run-guide-skip" type="button">跳过引导</button>
+          </div>
         </div>
         <div id="upgrade-overlay" class="upgrade-overlay" hidden>
           <div class="upgrade-dialog" role="dialog" aria-modal="true" aria-labelledby="upgrade-title">
@@ -94,6 +104,7 @@
                 <span class="dev-stage-switch" aria-hidden="true"></span>
                 <span>开发模式：开放全部关卡</span>
               </label>
+              <button id="hell-mode-entry" class="dev-stage-access" type="button" hidden>开发挑战：进入地狱模式</button>
             </div>
             <div id="stage-options" class="stage-options"></div>
           </div>
